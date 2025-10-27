@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maafin Aku 😢</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  /* HALAMAN 1: suasana marahan 😡 */
+  #page1 {
+    background: radial-gradient(circle at top, #ff4a4a, #ff1e1e, #b60000);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: fadeIn 1s ease;
+  }
+
+  /* HALAMAN 2: suasana damai 💖 */
+  #page2 {
+    background: linear-gradient(135deg, #ffd6d6, #ffb6c1);
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: fadeIn 1s ease;
+  }
+
+  /* CARD UTAMA */
+  .card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    max-width: 400px;
+    margin: 20px;
+    animation: shake 2s infinite;
+  }
+
+  /* Efek getar marah */
+  @keyframes shake {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-2px, 2px); }
+    50% { transform: translate(2px, -2px); }
+    75% { transform: translate(-1px, -2px); }
+  }
+
+  h1 {
+    font-size: 2.5em;
+    color: #ff2f2f;
+    margin-bottom: 10px;
+    text-shadow: 1px 2px 5px rgba(255, 0, 0, 0.4);
+  }
+
+  p {
+    font-size: 1.2em;
+    color: #333;
+  }
+
+  /* Tombol */
+  .buttons {
+    margin-top: 30px;
+  }
+
+  button {
+    font-size: 1.3em;
+    padding: 12px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: wiggle 1.5s infinite ease-in-out;
+  }
+
+  /* Efek tombol goyang halus */
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(1.5deg); }
+    50% { transform: rotate(-1.5deg); }
+    75% { transform: rotate(1deg); }
+  }
+
+  #yes {
+    background-color: #ff4d6d;
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 0, 76, 0.3);
+  }
+
+  #yes:hover {
+    transform: scale(1.1);
+    background-color: #ff1e4d;
+  }
+
+  #no {
+    background-color: #444;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Efek hati berjatuhan */
+  .love {
+    position: absolute;
+    color: #ff4d6d;
+    font-size: 24px;
+    opacity: 0.8;
+    animation: float 5s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(-800px) rotate(360deg); opacity: 0; }
+  }
+
+  /* Animasi transisi lembut */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HALAMAN 1 -->
+  <div id="page1">
+    <div class="card" id="card1">
+      <h1>Maafin Aku 😢</h1>
+      <p>Aku tahu aku salah... tapi jangan marah terus ya 😭</p>
+      <div class="buttons">
+        <button id="yes">Maafin 😊</button>
+        <button id="no">Enggak 😡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HALAMAN 2 -->
+  <div id="page2">
+    <div class="card" id="card2">
+      <h1>Yayy, Makasih sayang udah maafin 🥳</h1>
+      <p>Janji ga diulangin lagi 😙</p>
+    </div>
+  </div>
+
+<script>
+  const yesBtn = document.getElementById('yes');
+  const noBtn = document.getElementById('no');
+  const page1 = document.getElementById('page1');
+  const page2 = document.getElementById('page2');
+  const card1 = document.getElementById('card1');
+  let size = 1;
+
+  // Klik tombol Maafin
+  yesBtn.addEventListener('click', () => {
+    page1.style.display = 'none';
+    page2.style.display = 'flex';
+    spawnHearts();
+  });
+
+  // Klik tombol Enggak (mengecil tiap klik)
+  noBtn.addEventListener('click', () => {
+    if (size > 0.1) {
+      size -= 0.1;
+      noBtn.style.transform = `scale(${size})`;
+    }
+    if (size <= 0.1) {
+      noBtn.disabled = true;
+      noBtn.style.opacity = '0.5';
+      noBtn.style.pointerEvents = 'none';
+    }
+
+    // Getar lebih kuat tiap klik (kayak makin marah 😠)
+    card1.style.animation = 'shake 0.4s';
+    setTimeout(() => card1.style.animation = 'shake 2s infinite', 400);
+  });
+
+  // Efek hati berjatuhan
+  function spawnHearts() {
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('love');
+      heart.innerText = '💖';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = window.innerHeight + 'px';
+      heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+      heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 300);
+  }
+</script>
+
+</body>
+</html>
